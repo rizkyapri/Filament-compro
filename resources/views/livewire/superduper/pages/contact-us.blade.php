@@ -184,7 +184,7 @@
                                 <div>
                                     <label for="phone" class="block mb-1 text-sm font-medium text-gray-700">Phone number (optional)</label>
                                     <input type="tel" wire:model.blur="phone" id="phone"
-                                        placeholder="+1 (123) 456-7890"
+                                        placeholder="+62 (123) 456-7890"
                                         class="w-full px-4 py-2 transition-all border border-gray-300 rounded-md bg-background-light placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:border-primary-600 focus:ring-primary-600" />
                                 </div>
 

@@ -13,34 +13,34 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    50: '#EEEEFB',
-                    100: '#DCDCF7',
-                    200: '#B9B8EF',
-                    300: '#9795E6',
-                    400: '#7471DE',
-                    500: '#524ED5',
-                    600: '#413CAD',
-                    700: '#342F8A',
-                    800: '#2D2B8D', // base primary
-                    900: '#1E1C5A',
+                    50: '#eff6ff',
+                    100: '#dbeafe',
+                    200: '#bfdbfe',
+                    300: '#93c5fd',
+                    400: '#60a5fa',
+                    500: '#3b82f6',
+                    600: '#2563eb', // base primary
+                    700: '#1d4ed8',
+                    800: '#1e40af',
+                    900: '#1e3a8a',
                 },
                 secondary: {
-                    50: '#FFFBEB',
-                    100: '#FFF6D6',
-                    200: '#FFEDAD',
-                    300: '#FFE585',
-                    400: '#FFDC5C',
-                    500: '#FFD333',
-                    600: '#FFC903', // base secondary
-                    700: '#E6B500',
-                    800: '#BF9600',
-                    900: '#997800',
+                    50: '#ecfeff',
+                    100: '#cffafe',
+                    200: '#a5f3fc',
+                    300: '#67e8f9',
+                    400: '#22d3ee',
+                    500: '#06b6d4', // base secondary
+                    600: '#0891b2',
+                    700: '#0e7490',
+                    800: '#155e75',
+                    900: '#164e63',
                 },
                 background: {
                     white: '#FFFFFF',
-                    wheat: '#F9F6F0',
-                    light: '#F5F1E8',
-                    subtle: '#EDE7DB',
+                    wheat: '#F8FAFC', // slate-50
+                    light: '#F1F5F9', // slate-100
+                    subtle: '#E2E8F0', // slate-200
                 },
                 success: '#10B981',
                 error: '#EF4444',

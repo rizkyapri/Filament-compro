@@ -6,12 +6,12 @@
                     <div class="flex flex-col items-center justify-center gap-16">
                         <div class="max-w-[720px]">
                             <h2 class="text-3xl font-medium leading-loose text-center text-gray-100 lg:text-5xl xl:text-4xl">
-                                Feel proud of everything you <br/> <span class="text-5xl font-bold text-secondary-600">Start</span> with <span class="text-5xl font-bold text-secondary-600">SuperDuper</span>
+                                Empowering Your Business with <br/> <span class="text-5xl font-bold text-secondary-500">genz tech</span> IT Solutions
                             </h2>
                         </div>
-                        <a href="{{ $siteSettings->footer_cta_button_url ?? '#' }}"
+                        <a href="{{ route('contact-us') }}"
                             class="inline-block border border-gray-900 btn bg-secondary-700"><span>
-                                Get started— it\'s free
+                                Start Your Project Today
                             </span></a>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                             <a href="{{ route('home') }}">
                                 @php
                                     $brandLogo = $generalSettings->brand_logo ?? null;
-                                    $brandName = $generalSettings->brand_name ?? $siteSettings->name ?? config('app.name', 'SuperDuper');
+                                    $brandName = $generalSettings->brand_name ?? $siteSettings->name ?? config('app.name', 'genz tech');
                                     $footerLogo = $siteSettings->footer_logo ?? $brandLogo;
                                 @endphp
 
@@ -38,8 +38,8 @@
                             </a>
 
                             <div>
-                                <div class="lg:max-w-[416px]">
-                                    {{ $siteSettings->description ?? '' }}
+                                <div class="lg:max-w-[416px] text-gray-300">
+                                    {{ $siteSettings->description ?? 'genz tech is a leading IT solutions provider helping businesses innovate and thrive in the digital landscape with modern software and expert consulting.' }}
                                 </div>
 
                                 <a href="mailto:{{ $siteSettings->company_email ?? 'yourdemo@email.com' }}"
@@ -195,7 +195,7 @@
                 <div class="container-default">
                     <div class="text-center text-white text-opacity-80">
                         &copy; Copyright {{ date('Y') }}, {{ $siteSettings->copyright_text ?? 'All Rights Reserved' }}
-                        {{ $generalSettings->brand_name ?? $siteSettings->name ?? config('app.name', 'SuperDuper') }}
+                        {{ $generalSettings->brand_name ?? $siteSettings->name ?? config('app.name', 'genz tech') }}
                     </div>
                 </div>
             </div>

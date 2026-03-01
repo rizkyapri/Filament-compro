@@ -6,19 +6,14 @@ use App\Livewire\SuperDuper\Pages\ContactUs;
 use Illuminate\Support\Facades\Route;
 use Lab404\Impersonate\Services\ImpersonateManager;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+/* |-------------------------------------------------------------------------- | Web Routes |-------------------------------------------------------------------------- | | Here is where you can register web routes for your application. These | routes are loaded by the RouteServiceProvider and all of them will | be assigned to the "web" middleware group. Make something great! | */
 
 Route::get('/', function () {
-    return view('components.superduper.pages.home');
+    return view('components.superduper.pages.home', [
+    'pageTitle' => 'genz tech - Web Ecosystem & IT Services',
+    'pageDescription' => 'genz tech provides professional IT services, software development, and complete web ecosystems for your business needs.',
+    'metaKeywords' => 'genz tech, IT services, software development, web ecosystem, jasa IT',
+    ]);
 })->name('home');
 
 Route::get('/blog', BlogList::class)->name('blog');
@@ -39,23 +34,22 @@ Route::get('/coming-soon', function () {
     return view('components.superduper.pages.coming-soon', ['page_type' => 'generic']);
 })->name('coming-soon');
 
-Route::post('/contact', [App\Http\Controllers\ContactController::class, 'submit'])
+Route::post('/contact', [App\Http\Controllers\ContactController::class , 'submit'])
     ->name('contact.submit');
 
 // TODO: Create actual blog preview component
-Route::post('/blog-preview', function() {
-    // Implementation pending
+Route::post('/blog-preview', function () {
+// Implementation pending
 })->name('blog.preview');
 
-Route::get('impersonate/leave', function() {
-    if(!app(ImpersonateManager::class)->isImpersonating()) {
+Route::get('impersonate/leave', function () {
+    if (!app(ImpersonateManager::class)->isImpersonating()) {
         return redirect('/');
     }
 
     app(ImpersonateManager::class)->leave();
 
     return redirect(
-        session()->pull('impersonate.back_to')
+    session()->pull('impersonate.back_to')
     );
 })->name('impersonate.leave')->middleware('web');
-

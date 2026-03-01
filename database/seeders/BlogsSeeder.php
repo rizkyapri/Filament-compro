@@ -44,7 +44,7 @@ class BlogsSeeder extends Seeder
 
         if (empty($adminIds)) {
             // Create a default user if none exists
-            $userId = (string) new Ulid();
+            $userId = (string)new Ulid();
             User::create([
                 'id' => $userId,
                 'firstname' => 'System',
@@ -55,13 +55,15 @@ class BlogsSeeder extends Seeder
             $adminIds = [$userId];
         }
 
+        $itParentCategories = ['Software Development', 'IT Infrastructure', 'Tech Insights', 'Business Solutions'];
+
         // Create parent categories
         $parentCategories = [];
         foreach (range(1, 4) as $index) {
-            $name = ucwords($faker->words(2, true));
+            $name = $itParentCategories[$index - 1];
             $creatorId = $faker->randomElement($adminIds);
             $parentCategories[] = [
-                'id' => (string) new Ulid(),
+                'id' => (string)new Ulid(),
                 'name' => $name,
                 'slug' => Str::slug($name),
                 'description' => $faker->paragraph(2),
@@ -82,14 +84,16 @@ class BlogsSeeder extends Seeder
         // Create child categories
         $parentIds = DB::table('blog_categories')->pluck('id')->toArray();
 
+        $itChildCategories = ['Web Ecosystems', 'Cloud Migration', 'Cybersecurity', 'Mobile Apps', 'Data Analytics', 'IT Consulting', 'Managed Services', 'Enterprise Software'];
+
         $childCategories = [];
         foreach (range(1, 8) as $index) {
-            $name = ucwords($faker->words(3, true));
+            $name = $itChildCategories[$index - 1];
             $creatorId = $faker->randomElement($adminIds);
             $updaterId = $faker->boolean(30) ? $faker->randomElement($adminIds) : $creatorId;
 
             $childCategories[] = [
-                'id' => (string) new Ulid(),
+                'id' => (string)new Ulid(),
                 'parent_id' => $faker->randomElement($parentIds),
                 'name' => $name,
                 'slug' => Str::slug($name),
@@ -147,22 +151,23 @@ class BlogsSeeder extends Seeder
         // Prepare posts data
         $posts = [];
         foreach (range(1, 20) as $index) {
-            $title = $faker->sentence;
+            $itTopics = ['The Future of Cloud Computing', 'Why Your Business Needs a Web Ecosystem', 'Top Software Development Trends', 'Essential Cybersecurity Practices', 'How IT Consulting Drives Growth'];
+            $title = $faker->randomElement($itTopics) . " " . $faker->catchPhrase;
             $creatorId = $faker->randomElement($editorIds);
             $updaterId = $faker->boolean(40) ? $faker->randomElement($editorIds) : $creatorId;
 
             // Generate Markdown content instead of HTML
-            $contentRaw = "# " . $faker->sentence . "\n\n";
-            $contentRaw .= $faker->paragraph(3) . "\n\n";
-            $contentRaw .= "## " . $faker->sentence . "\n\n";
-            $contentRaw .= $faker->paragraph(4) . "\n\n";
-            $contentRaw .= "* " . $faker->sentence . "\n";
-            $contentRaw .= "* " . $faker->sentence . "\n";
-            $contentRaw .= "* " . $faker->sentence . "\n\n";
-            $contentRaw .= "## " . $faker->sentence . "\n\n";
-            $contentRaw .= $faker->paragraph(3) . "\n\n";
-            $contentRaw .= "> " . $faker->sentence . "\n\n";
-            $contentRaw .= $faker->paragraph(2);
+            $contentRaw = "# " . $title . "\n\n";
+            $contentRaw .= $faker->realText(300) . "\n\n";
+            $contentRaw .= "## Key Strategies for Success\n\n";
+            $contentRaw .= $faker->realText(400) . "\n\n";
+            $contentRaw .= "* " . $faker->catchPhrase . "\n";
+            $contentRaw .= "* " . $faker->catchPhrase . "\n";
+            $contentRaw .= "* " . $faker->catchPhrase . "\n\n";
+            $contentRaw .= "## Best Practices and Recommendations\n\n";
+            $contentRaw .= $faker->realText(300) . "\n\n";
+            $contentRaw .= "> \"" . $faker->catchPhrase . "\"\n\n";
+            $contentRaw .= $faker->realText(200);
 
             // Convert Markdown to HTML using CommonMark
             $converter = new \League\CommonMark\GithubFlavoredMarkdownConverter([
@@ -192,7 +197,7 @@ class BlogsSeeder extends Seeder
             }
 
             $posts[] = [
-                'id' => (string) new Ulid(),
+                'id' => (string)new Ulid(),
                 'blog_author_id' => $faker->randomElement($authorIds),
                 'blog_category_id' => $faker->randomElement($categoryIds),
                 'title' => $title,

@@ -14,11 +14,12 @@ class BannersSeeder extends Seeder
     {
         $faker = Faker::create();
 
+        $bannerCategories = ['Hero Banners', 'Sidebar Adverts', 'Marketing Campaigns', 'Service Highlights', 'Partner Showcases'];
         // Create parent categories
         $parentCategoryIds = [];
         for ($i = 0; $i < 5; $i++) {
-            $name = $faker->words(3, true);
-            $id = (string) new Ulid();
+            $name = $bannerCategories[$i];
+            $id = (string)new Ulid();
             $parentCategoryIds[] = $id;
 
             DB::table('banner_categories')->insert([
@@ -29,7 +30,7 @@ class BannersSeeder extends Seeder
                 'is_active' => $faker->boolean(70),
                 'meta_title' => $faker->sentence(4),
                 'meta_description' => $faker->sentence(10),
-                'locale' => $faker->randomElement(['en', 'id', 'zh', 'ja']),
+                'locale' => 'en',
                 'options' => json_encode(['position' => $faker->randomElement(['top', 'side', 'bottom'])]),
                 'created_at' => $faker->dateTimeThisYear(),
                 'updated_at' => $faker->dateTimeThisYear()
@@ -37,10 +38,11 @@ class BannersSeeder extends Seeder
         }
 
         // Create some child categories
+        $bannerSubCategories = ['Special Offers', 'New Services', 'Tech Events', 'Case Studies', 'Testimonials'];
         $allCategoryIds = $parentCategoryIds;
         for ($i = 0; $i < 5; $i++) {
-            $name = $faker->words(3, true);
-            $id = (string) new Ulid();
+            $name = $bannerSubCategories[$i];
+            $id = (string)new Ulid();
             $allCategoryIds[] = $id;
 
             DB::table('banner_categories')->insert([
@@ -52,7 +54,7 @@ class BannersSeeder extends Seeder
                 'is_active' => $faker->boolean(70),
                 'meta_title' => $faker->sentence(4),
                 'meta_description' => $faker->sentence(10),
-                'locale' => $faker->randomElement(['en', 'id', 'zh', 'ja']),
+                'locale' => 'en',
                 'options' => json_encode(['position' => $faker->randomElement(['top', 'side', 'bottom'])]),
                 'created_at' => $faker->dateTimeThisYear(),
                 'updated_at' => $faker->dateTimeThisYear()
@@ -65,7 +67,7 @@ class BannersSeeder extends Seeder
             $endDate = $faker->dateTimeBetween($startDate, '+3 months');
 
             DB::table('banner_contents')->insert([
-                'id' => (string) new Ulid(),
+                'id' => (string)new Ulid(),
                 'banner_category_id' => $faker->randomElement($allCategoryIds),
                 'sort' => $i,
                 'title' => $faker->sentence,
@@ -76,7 +78,7 @@ class BannersSeeder extends Seeder
                 'published_at' => $faker->dateTimeBetween('-2 months', 'now'),
                 'click_url' => $faker->url,
                 'click_url_target' => $faker->randomElement(['_blank', '_self']),
-                'locale' => $faker->randomElement(['en', 'id', 'zh', 'ja']),
+                'locale' => 'en',
                 'options' => json_encode([
                     'display_type' => $faker->randomElement(['slide', 'static', 'popup']),
                     'transition' => $faker->randomElement(['fade', 'slide', 'none']),
